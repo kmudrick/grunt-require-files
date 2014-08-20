@@ -1,6 +1,6 @@
 {
   "name": "grunt-require-files",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "grunt plugin to generate AMD requires for listed files",
   "homepage": "https://github.com/kmudrick/grunt-require-files",
   "repository": {
