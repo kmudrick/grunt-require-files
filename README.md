@@ -3,8 +3,8 @@
 > grunt plugin to generate AMD requires for listed files
 
 I wrote this as a hack to generate a valid javascript source file declaring require() of file-globbed modules which I could load
-into a [QUnit](http://qunitjs.com/) test runner that I was invoking from [grunt-qunit-istanbul](https://github.com/asciidisco/grunt-qunit-istanbul) 
-to get proper test coverage metrics.  The grunt-qunit-istanbul plugin only instruments (for coverage) source files which were loaded by the 
+into a [QUnit](http://qunitjs.com/) test runner that was being run via the [grunt-qunit-istanbul](https://github.com/asciidisco/grunt-qunit-istanbul)
+plugin.  The grunt-qunit-istanbul plugin only instruments (for coverage metrics) those source files which were loaded by the 
 qunit test runner; therefore if your QUnit test modules did require all of your sources, you would be mislead into thinking you were covering
 more than you actually were.
 
@@ -67,7 +67,7 @@ grunt.initConfig({
       relativeTo: 'test/js/tests.html'
     },
     files: {
-      'build/test-requires.js': ['src/js/**/*.js', 'test/js/specs/**/*Spec.js],
+      'build/test-requires.js': ['src/js/**/*.js', 'test/js/specs/**/*Spec.js'],
     },
   },
 })
@@ -77,7 +77,7 @@ grunt.initConfig({
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
+* 0.0.1 Initial release
 
 ## License
 Copyright (c) 2014 Kevin Mudrick. Licensed under the MIT license.
