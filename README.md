@@ -2,6 +2,12 @@
 
 > grunt plugin to generate AMD requires for listed files
 
+I wrote this as a hack to generate a valid javascript source file declaring require() of file-globbed modules which I could load
+into a [QUnit](http://qunitjs.com/) test runner that I was invoking from [grunt-qunit-istanbul](https://github.com/asciidisco/grunt-qunit-istanbul) 
+to get proper test coverage metrics.  The grunt-qunit-istanbul plugin only instruments (for coverage) source files which were loaded by the 
+qunit test runner; therefore if your QUnit test modules did require all of your sources, you would be mislead into thinking you were covering
+more than you actually were.
+
 ## Getting Started
 This plugin requires Grunt.
 
@@ -37,46 +43,31 @@ grunt.initConfig({
 
 ### Options
 
-#### options.separator
+#### options.relativeTo
 Type: `String`
-Default value: `',  '`
+Default value: `./`
 
-A string value that is used to do something with whatever.
+A string value representing a path (to a directory or file), from which the required modules would be relative'ly loaded from.
 
-#### options.punctuation
+#### options.callback
 Type: `String`
-Default value: `'.'`
+Default value: `''`
 
-A string value that is used to do something else with whatever else.
+A string value representing the callback function that would be invoked when the require()'d modules successfully load.
 
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
-
-```js
-grunt.initConfig({
-  require_files: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-})
-```
-
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+In this example, we have a test runner at `test/js/tests.html`, source modules in `src/js`, and test specs in `test/js/specs` that end in `Spec.js`
 
 ```js
 grunt.initConfig({
   require_files: {
     options: {
-      separator: ': ',
-      punctuation: ' !!!',
+      relativeTo: 'test/js/tests.html'
     },
     files: {
-      'dest/default_options': ['src/testing', 'src/123'],
+      'build/test-requires.js': ['src/js/**/*.js', 'test/js/specs/**/*Spec.js],
     },
   },
 })
