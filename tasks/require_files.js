@@ -19,13 +19,20 @@ module.exports = function (grunt) {
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
       relativeTo: './',
-      callback: ''
+      callback: '',
+      extraModules: []
     });
 
     var relativeToPath = path.dirname(options.relativeTo);
 
     // Start the require & the modules array
     var output = 'require([';
+
+    if (options.extraModules) {
+      options.extraModules.forEach(function(moduleName) {
+        output += '"' + moduleName + '",';
+      });
+    }
 
     // Iterate over all specified file groups.
     this.files.forEach(function (file) {

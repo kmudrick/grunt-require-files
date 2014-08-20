@@ -55,16 +55,26 @@ Default value: `''`
 
 A string value representing the callback function that would be invoked when the require()'d modules successfully load.
 
+#### options.extraModules
+Type: `Array`
+Default value: `[]`
+
+An array of module names to also load.
+
+
 ### Usage Examples
 
 #### Default Options
-In this example, we have a test runner at `test/js/tests.html`, source modules in `src/js`, and test specs in `test/js/specs` that end in `Spec.js`
+In this example, we have a test runner at `test/js/tests.html`, source modules in `src/js`, and test specs in `test/js/specs` that end in `Spec.js`.
+Additionally, we will require two extra modules: `ModuleA` and `ModuleB`.
 
 ```js
 grunt.initConfig({
   require_files: {
     options: {
       relativeTo: 'test/js/tests.html'
+      callback: 'QUnit.start',
+      extraModules: ['ModuleA', 'ModuleB']
     },
     files: {
       'build/test-requires.js': ['src/js/**/*.js', 'test/js/specs/**/*Spec.js'],
@@ -78,6 +88,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 * 0.0.1 Initial release
+* 0.0.2 Add support for extra modules to require
 
 ## License
 Copyright (c) 2014 Kevin Mudrick. Licensed under the MIT license.

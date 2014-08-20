@@ -36,7 +36,8 @@ module.exports = function (grunt) {
       test_glob: {
         options: {
           relativeTo: 'test/fixtures/some/path/example.html',
-          callback: 'start_tests'
+          callback: 'start_tests',
+          extraModules: ['some/extra/module']
         },
         files: {
           'tmp/test_glob.js': ['test/fixtures/**/*.js', 'test/fixtures/other/some_lib.js']
